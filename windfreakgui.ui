@@ -1,0 +1,922 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Windfreak_qt</class>
+ <widget class="QMainWindow" name="Windfreak_qt">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>741</width>
+    <height>738</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>740nm LASER LOCK</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="ButtonUpdate_freq">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>90</y>
+      <width>85</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Update</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>90</y>
+      <width>196</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Sans Serif</family>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Set Freq (MHz)</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ButtonConnect">
+    <property name="geometry">
+     <rect>
+      <x>225</x>
+      <y>45</y>
+      <width>161</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Connect to windfreak</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ButtonUpdate_off">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>5</y>
+      <width>161</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Device off</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ButtonUpdate_on">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>40</y>
+      <width>161</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Device on</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>5</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Controler Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboSerialBox">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>5</y>
+      <width>211</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="control_label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>25</y>
+      <width>191</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Panel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="text">
+     <string>Not connected</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>255</y>
+      <width>141</width>
+      <height>36</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Sans Serif</family>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Set Power</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="freq_box">
+    <property name="geometry">
+     <rect>
+      <x>215</x>
+      <y>80</y>
+      <width>136</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Sans Serif</family>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="keyboardTracking">
+     <bool>false</bool>
+    </property>
+    <property name="decimals">
+     <number>3</number>
+    </property>
+    <property name="minimum">
+     <double>36.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>4400.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.500000000000000</double>
+    </property>
+    <property name="value">
+     <double>100.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="power_box">
+    <property name="geometry">
+     <rect>
+      <x>185</x>
+      <y>250</y>
+      <width>56</width>
+      <height>36</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Sans Serif</family>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="maximum">
+     <number>3</number>
+    </property>
+    <property name="value">
+     <number>3</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>310</y>
+      <width>166</width>
+      <height>36</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Sans Serif</family>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Set Channel</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="channel_box">
+    <property name="geometry">
+     <rect>
+      <x>185</x>
+      <y>310</y>
+      <width>56</width>
+      <height>36</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Sans Serif</family>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <number>8</number>
+    </property>
+    <property name="value">
+     <number>1</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ButtonUpdate_power">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>255</y>
+      <width>85</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Update</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ButtonUpdate_channel">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>315</y>
+      <width>85</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Update</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>155</y>
+      <width>221</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Sans Serif</family>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Set Freq (MHz) </string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="freq_box_2">
+    <property name="geometry">
+     <rect>
+      <x>215</x>
+      <y>150</y>
+      <width>136</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Sans Serif</family>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="keyboardTracking">
+     <bool>false</bool>
+    </property>
+    <property name="decimals">
+     <number>3</number>
+    </property>
+    <property name="minimum">
+     <double>36.000000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>4400.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.500000000000000</double>
+    </property>
+    <property name="value">
+     <double>100.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ButtonUpdate_freq_2">
+    <property name="geometry">
+     <rect>
+      <x>645</x>
+      <y>155</y>
+      <width>85</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Update</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="freq_box_3">
+    <property name="geometry">
+     <rect>
+      <x>355</x>
+      <y>150</y>
+      <width>136</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Sans Serif</family>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="keyboardTracking">
+     <bool>false</bool>
+    </property>
+    <property name="decimals">
+     <number>3</number>
+    </property>
+    <property name="minimum">
+     <double>0.500000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>4400.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.100000000000000</double>
+    </property>
+    <property name="value">
+     <double>1.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>235</x>
+      <y>215</y>
+      <width>76</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Sans Serif</family>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Freq</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>215</y>
+      <width>76</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Sans Serif</family>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Step</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="time_box">
+    <property name="geometry">
+     <rect>
+      <x>495</x>
+      <y>150</y>
+      <width>136</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Sans Serif</family>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="keyboardTracking">
+     <bool>false</bool>
+    </property>
+    <property name="decimals">
+     <number>3</number>
+    </property>
+    <property name="minimum">
+     <double>0.500000000000000</double>
+    </property>
+    <property name="maximum">
+     <double>4400.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.100000000000000</double>
+    </property>
+    <property name="value">
+     <double>1.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>495</x>
+      <y>215</y>
+      <width>176</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Sans Serif</family>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Timestep(s)</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Up">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>80</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Up</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Down">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>105</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Down</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>365</y>
+      <width>455</width>
+      <height>290</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_lock">
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_12">
+       <property name="font">
+        <font>
+         <family>Sans Serif</family>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Max EOM f</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QDoubleSpinBox" name="freq_lock_max">
+       <property name="font">
+        <font>
+         <family>Sans Serif</family>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="keyboardTracking">
+        <bool>false</bool>
+       </property>
+       <property name="decimals">
+        <number>2</number>
+       </property>
+       <property name="minimum">
+        <double>36.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>4400.000000000000000</double>
+       </property>
+       <property name="singleStep">
+        <double>0.500000000000000</double>
+       </property>
+       <property name="value">
+        <double>1800.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_9">
+       <property name="font">
+        <font>
+         <family>Sans Serif</family>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Max wavelength</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QDoubleSpinBox" name="freq_lock_box">
+       <property name="font">
+        <font>
+         <family>Sans Serif</family>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="keyboardTracking">
+        <bool>false</bool>
+       </property>
+       <property name="decimals">
+        <number>5</number>
+       </property>
+       <property name="minimum">
+        <double>36.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>4400.000000000000000</double>
+       </property>
+       <property name="singleStep">
+        <double>0.001000000000000</double>
+       </property>
+       <property name="value">
+        <double>739.052379999999971</double>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QDoubleSpinBox" name="freq_lock_box_max">
+       <property name="font">
+        <font>
+         <family>Sans Serif</family>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="keyboardTracking">
+        <bool>false</bool>
+       </property>
+       <property name="decimals">
+        <number>5</number>
+       </property>
+       <property name="minimum">
+        <double>36.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>4400.000000000000000</double>
+       </property>
+       <property name="singleStep">
+        <double>0.001000000000000</double>
+       </property>
+       <property name="value">
+        <double>739.052400000000034</double>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_10">
+       <property name="font">
+        <font>
+         <family>Sans Serif</family>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Min wavelength</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QDoubleSpinBox" name="freq_lock_box_min">
+       <property name="font">
+        <font>
+         <family>Sans Serif</family>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="keyboardTracking">
+        <bool>false</bool>
+       </property>
+       <property name="decimals">
+        <number>5</number>
+       </property>
+       <property name="minimum">
+        <double>36.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>4400.000000000000000</double>
+       </property>
+       <property name="singleStep">
+        <double>0.001000000000000</double>
+       </property>
+       <property name="value">
+        <double>739.052369999999996</double>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_13">
+       <property name="font">
+        <font>
+         <family>Sans Serif</family>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Min EOM f</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QDoubleSpinBox" name="freq_lock_min">
+       <property name="font">
+        <font>
+         <family>Sans Serif</family>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="keyboardTracking">
+        <bool>false</bool>
+       </property>
+       <property name="decimals">
+        <number>2</number>
+       </property>
+       <property name="minimum">
+        <double>36.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>4400.000000000000000</double>
+       </property>
+       <property name="singleStep">
+        <double>0.500000000000000</double>
+       </property>
+       <property name="value">
+        <double>1600.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QPushButton" name="ButtonLock">
+       <property name="font">
+        <font>
+         <pointsize>35</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Lock</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_11">
+       <property name="font">
+        <font>
+         <family>Sans Serif</family>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Target wavelength</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QDoubleSpinBox" name="p_freq_lock">
+       <property name="font">
+        <font>
+         <family>Sans Serif</family>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="keyboardTracking">
+        <bool>false</bool>
+       </property>
+       <property name="decimals">
+        <number>1</number>
+       </property>
+       <property name="minimum">
+        <double>-100.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>100.000000000000000</double>
+       </property>
+       <property name="singleStep">
+        <double>0.500000000000000</double>
+       </property>
+       <property name="value">
+        <double>-5.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>365</y>
+      <width>256</width>
+      <height>110</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_info">
+     <item row="1" column="1">
+      <widget class="QLabel" name="label_power">
+       <property name="font">
+        <font>
+         <family>Sans Serif</family>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_optical_freq_4">
+       <property name="font">
+        <font>
+         <family>Sans Serif</family>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>RF freq</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_freq">
+       <property name="font">
+        <font>
+         <family>Sans Serif</family>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>34</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_optical_freq_5">
+       <property name="font">
+        <font>
+         <family>Sans Serif</family>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>RF power</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_optical_freq_3">
+       <property name="font">
+        <font>
+         <family>Sans Serif</family>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Wavelength</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="label_wavelength">
+       <property name="font">
+        <font>
+         <family>Sans Serif</family>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>0 nm</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <zorder>ButtonUpdate_off</zorder>
+   <zorder>ButtonUpdate_on</zorder>
+   <zorder>ButtonUpdate_freq</zorder>
+   <zorder>label</zorder>
+   <zorder>ButtonConnect</zorder>
+   <zorder>label_4</zorder>
+   <zorder>comboSerialBox</zorder>
+   <zorder>control_label</zorder>
+   <zorder>label_2</zorder>
+   <zorder>freq_box</zorder>
+   <zorder>power_box</zorder>
+   <zorder>label_3</zorder>
+   <zorder>channel_box</zorder>
+   <zorder>ButtonUpdate_power</zorder>
+   <zorder>ButtonUpdate_channel</zorder>
+   <zorder>label_5</zorder>
+   <zorder>freq_box_2</zorder>
+   <zorder>ButtonUpdate_freq_2</zorder>
+   <zorder>freq_box_3</zorder>
+   <zorder>label_6</zorder>
+   <zorder>label_7</zorder>
+   <zorder>time_box</zorder>
+   <zorder>label_8</zorder>
+   <zorder>pushButton_Up</zorder>
+   <zorder>pushButton_Down</zorder>
+   <zorder>gridLayoutWidget</zorder>
+   <zorder>gridLayoutWidget_2</zorder>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>741</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <tabstops>
+  <tabstop>comboSerialBox</tabstop>
+  <tabstop>ButtonConnect</tabstop>
+  <tabstop>ButtonUpdate_off</tabstop>
+  <tabstop>ButtonUpdate_on</tabstop>
+  <tabstop>freq_box</tabstop>
+  <tabstop>pushButton_Up</tabstop>
+  <tabstop>pushButton_Down</tabstop>
+  <tabstop>ButtonUpdate_freq</tabstop>
+  <tabstop>freq_box_2</tabstop>
+  <tabstop>freq_box_3</tabstop>
+  <tabstop>time_box</tabstop>
+  <tabstop>ButtonUpdate_freq_2</tabstop>
+  <tabstop>power_box</tabstop>
+  <tabstop>ButtonUpdate_power</tabstop>
+  <tabstop>channel_box</tabstop>
+  <tabstop>ButtonUpdate_channel</tabstop>
+  <tabstop>freq_lock_box</tabstop>
+  <tabstop>freq_lock_box_max</tabstop>
+  <tabstop>freq_lock_box_min</tabstop>
+  <tabstop>freq_lock_max</tabstop>
+  <tabstop>freq_lock_min</tabstop>
+  <tabstop>ButtonLock</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+ <designerdata>
+  <property name="gridDeltaX">
+   <number>5</number>
+  </property>
+  <property name="gridDeltaY">
+   <number>5</number>
+  </property>
+  <property name="gridSnapX">
+   <bool>true</bool>
+  </property>
+  <property name="gridSnapY">
+   <bool>true</bool>
+  </property>
+  <property name="gridVisible">
+   <bool>true</bool>
+  </property>
+ </designerdata>
+</ui>
