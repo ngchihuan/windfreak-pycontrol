@@ -2,11 +2,13 @@
 
 This software can be used to lock the frequency of a laser using wavemeter as a reference.
 The feedback loop is done by fetching a wavemeter reading and control the frequency of a RF device, in this case the Windfreak. The current version only supports SynthUSBII: 34MHz – 4.4GHz USB RF Signal Generator. (For more information, [https://windfreaktech.com/product/usb-rf-signal-generator/](https://windfreaktech.com/product/usb-rf-signal-generator/)).
+
 Currently, I have refactored the code a bit such that the program starts even without any available devices.
 I would come back and do more cleaning up.
+
 The GUI of the software is shown here
 
-![Alt text](gui.jpg?raw=true "GUI")
+![Alt text](gui.png?raw=true "GUI")
 
 # Installation and Dependencies
 
