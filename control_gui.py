@@ -8,11 +8,9 @@ import sys
 import glob
 import serial
 import json
-import urllib2
-import windfreak_control2 as wc
+import urllib3
+import windfreak_control3 as wc
 from PyQt5 import QtGui, uic, QtCore, QtWidgets
-from PyQt5.QtCore import QTimer,SIGNAL,QThread
-from PyQt5.QtGui import QPixmap
 import datetime
 import time
 
@@ -85,14 +83,14 @@ class MyWindowClass(QtWidgets.QMainWindow, form_class):
 
         self.comboSerialBox.addItems(serial_ports()) #Gets a list of avaliable serial ports to connect to and adds to combo box
 
-        self.set_freq_timer= QTimer()
+        self.set_freq_timer= QtCore.QTimer()
         self.set_freq_timer.timeout.connect(self.slowFreqUpdate)
 
-        self.wavelength_check_timer = QTimer()
+        self.wavelength_check_timer = QtCore.QTimer()
         self.wavelength_check_timer.timeout.connect(self.updateWavemeterDisplay)
         self.wavelength_check_timer.start(10)
 
-        self.set_lock_timer = QTimer()
+        self.set_lock_timer = QtCore.QTimer()
         self.set_lock_timer.timeout.connect(self.lock_process)
 
         self.ButtonLock.clicked.connect(self.lock_slot)
