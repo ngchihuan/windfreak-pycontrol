@@ -1,4 +1,5 @@
 # Introduction
+This repository has been forked from https://github.com/ngchihuan/windfreak-pycontrol and updated to run on Python 3 and PyQt5 instead, as the original runs on Python 2 and PyQt4.
 
 This software can be used to lock the frequency of a laser using wavemeter as a reference.
 The feedback loop is done by fetching a wavemeter reading and control the frequency of a RF device, in this case the Windfreak. The current version only supports SynthUSBII: 34MHz – 4.4GHz USB RF Signal Generator. (For more information, [https://windfreaktech.com/product/usb-rf-signal-generator/](https://windfreaktech.com/product/usb-rf-signal-generator/)).

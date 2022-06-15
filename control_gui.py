@@ -1,9 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-Nguyen Chi Huan modified on 6/5/2015
-version 3 19/11/2015
-Note: Windfreak use MHz as unit for the input frequency
+Updated on 15th June 2022 to Python 3 and PyQt5
 """
 
 import sys
@@ -12,9 +10,9 @@ import serial
 import json
 import urllib2
 import windfreak_control2 as wc
-from PyQt4 import QtGui, uic
-from PyQt4.QtCore import QTimer,SIGNAL,QThread
-from PyQt4.QtGui import QPixmap
+from PyQt5 import QtGui, uic, QtCore, QtWidgets
+from PyQt5.QtCore import QTimer,SIGNAL,QThread
+from PyQt5.QtGui import QPixmap
 import datetime
 import time
 
@@ -61,17 +59,18 @@ def serial_ports():
 
 
 
-class MyWindowClass(QtGui.QMainWindow, form_class):
+class MyWindowClass(QtWidgets.QMainWindow, form_class):
     connected = bool(False)
     windfreak = None 
     time = 0
+    UpdatedFreq = QtCore.pyqtSignal()
 
     #set_freq_timer.timeout.connect()
 
 
     
     def __init__(self, parent=None):
-        QtGui.QMainWindow.__init__(self, parent)
+        QtWidgets.QMainWindow.__init__(self, parent)
         self.setupUi(self)
 
         self.ButtonUpdate_freq.clicked.connect(self.FreqUpdate_Slot)
@@ -142,7 +141,8 @@ class MyWindowClass(QtGui.QMainWindow, form_class):
     def slowFreqUpdate_Slot(self,value):
         self.timestep = float(self.time_box.text())
         self.set_freq_timer.start(self.timestep*100)
-        self.connect(self,SIGNAL("UpdatedFreq"),self.Pause_slowFreqUpdateSlot)
+        # self.connect(self,SIGNAL("UpdatedFreq"),self.Pause_slowFreqUpdateSlot)
+        self.UpdatedFreq.connect(self.Pause_slowFreqUpdateSlot)
 
     def Pause_slowFreqUpdateSlot(self):
         self.set_freq_timer.stop()
@@ -163,7 +163,7 @@ class MyWindowClass(QtGui.QMainWindow, form_class):
         if abs(self.freq_end - self.freq_current) <= self.freqstep:
             self.updateFreq((self.freq_end))
             print('Finishing Slowly Updating Freq')
-            self.emit(SIGNAL("UpdatedFreq"))
+            self.UpdatedFreq.emit()
         elif self.freq_end  > self.freq_current :
             self.updateFreq(self.freq_current + self.freqstep)
         elif  self.freq_end  < self.freq_current :
@@ -276,7 +276,7 @@ class MyWindowClass(QtGui.QMainWindow, form_class):
             passed = False
         return passed
 
-app = QtGui.QApplication(sys.argv)
+app = QtWidgets.QApplication(sys.argv)
 myWindow = MyWindowClass(None)
 myWindow.show()
 app.exec_()
