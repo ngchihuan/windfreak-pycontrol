@@ -28,7 +28,7 @@ def serial_ports():
         ports = ['COM' + str(i + 1) for i in range(256)]
     elif sys.platform.startswith('linux'):
     # this is to exclude your current terminal "/dev/tty"
-        ports = glob.glob('/dev/serial/by-id/usb-W*')
+        ports = glob.glob('/dev/tty[A-Za-z]*')
         print(ports)
     elif sys.platform.startswith('darwin'):
         ports = glob.glob('/dev/tty.*')
@@ -46,8 +46,6 @@ def serial_ports():
             s.close()
             result.append(port)
         except serial.SerialException:
-        #except:
-            raise IOError("Problem connecting to serial device.")
             pass
     print('result is')
     print(result)
@@ -120,7 +118,7 @@ class MyWindowClass(QtWidgets.QMainWindow, form_class):
     def ButtonConnect_clicked(self,connection):
         if not self.connected:
             self.windfreak = wc.windfreakusb2(str(self.comboSerialBox.currentText()))
-            self.timer = QTimer()
+            self.timer = QtCore.QTimer()
             self.connected = True
             self.timer.timeout.connect(self.update)
             self.timer.start(1000)
@@ -138,7 +136,7 @@ class MyWindowClass(QtWidgets.QMainWindow, form_class):
 
     def slowFreqUpdate_Slot(self,value):
         self.timestep = float(self.time_box.text())
-        self.set_freq_timer.start(self.timestep*100)
+        self.set_freq_timer.start(int(self.timestep*100))
         # self.connect(self,SIGNAL("UpdatedFreq"),self.Pause_slowFreqUpdateSlot)
         self.UpdatedFreq.connect(self.Pause_slowFreqUpdateSlot)
 
@@ -269,10 +267,11 @@ class MyWindowClass(QtWidgets.QMainWindow, form_class):
             self.set_lock_timer.stop()
 
     def prelock_check(self):
-        passed = True
+        if self.wavelength == "Unavailable wavemeter":
+            return False
         if float(self.wavelength) < float(self.freq_lock_box_min.text()) or float(self.wavelength) > float(self.freq_lock_box_max.text()) :
-            passed = False
-        return passed
+            return False
+        return True
 
 app = QtWidgets.QApplication(sys.argv)
 myWindow = MyWindowClass(None)
