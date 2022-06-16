@@ -17,17 +17,15 @@ Users can clone the project from github: [https://github.com/ngchihuan/windfreak
 
 Dependencies: 
 
-Python2 and its builtin libraries. 
+Python3 and its builtin libraries. 
 
-`PyQt4==4.11.4`
+`PyQt5=5.15.6`
 
 `pyserial==3.5`
 
-Note that PyQt4 installations can be problematic.
-
 # Quick start
 
-Run the software using terminal command`python2 control_gui.py` 
+Run the software using terminal command`python3 control_gui.py` 
 
 Step 1. Choose the windfreak device using the drop list which shows available devices listed as serial devices in linux.
 

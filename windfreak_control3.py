@@ -30,12 +30,12 @@ class windfreakusb2(object):
 		return ser
 		
 	def _serial_write(self, string):
-		self.serial.write(string + '\n')
+		self.serial.write(bytes(string + '\n', 'utf-8'))
 		
 	def _serial_read(self):
 		msg_string = self.serial.readline()
 		# Remove any linefeeds etc
-		msg_string = msg_string.rstrip()
+		msg_string = msg_string.rstrip().decode('utf-8')
 		return msg_string
 		
 	def get_freq(self):

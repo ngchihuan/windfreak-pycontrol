@@ -1,20 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-Nguyen Chi Huan modified on 6/5/2015
-version 3 19/11/2015
-Note: Windfreak use MHz as unit for the input frequency
+Updated on 15th June 2022 to Python 3 and PyQt5
 """
 
 import sys
 import glob
 import serial
 import json
-import urllib2
-import windfreak_control2 as wc
-from PyQt4 import QtGui, uic
-from PyQt4.QtCore import QTimer,SIGNAL,QThread
-from PyQt4.QtGui import QPixmap
+import urllib3
+import windfreak_control3 as wc
+from PyQt5 import QtGui, uic, QtCore, QtWidgets
 import datetime
 import time
 
@@ -32,7 +28,7 @@ def serial_ports():
         ports = ['COM' + str(i + 1) for i in range(256)]
     elif sys.platform.startswith('linux'):
     # this is to exclude your current terminal "/dev/tty"
-        ports = glob.glob('/dev/serial/by-id/usb-W*')
+        ports = glob.glob('/dev/tty[A-Za-z]*')
         print(ports)
     elif sys.platform.startswith('darwin'):
         ports = glob.glob('/dev/tty.*')
@@ -50,8 +46,6 @@ def serial_ports():
             s.close()
             result.append(port)
         except serial.SerialException:
-        #except:
-            raise IOError("Problem connecting to serial device.")
             pass
     print('result is')
     print(result)
@@ -61,17 +55,18 @@ def serial_ports():
 
 
 
-class MyWindowClass(QtGui.QMainWindow, form_class):
+class MyWindowClass(QtWidgets.QMainWindow, form_class):
     connected = bool(False)
     windfreak = None 
     time = 0
+    UpdatedFreq = QtCore.pyqtSignal()
 
     #set_freq_timer.timeout.connect()
 
 
     
     def __init__(self, parent=None):
-        QtGui.QMainWindow.__init__(self, parent)
+        QtWidgets.QMainWindow.__init__(self, parent)
         self.setupUi(self)
 
         self.ButtonUpdate_freq.clicked.connect(self.FreqUpdate_Slot)
@@ -86,14 +81,14 @@ class MyWindowClass(QtGui.QMainWindow, form_class):
 
         self.comboSerialBox.addItems(serial_ports()) #Gets a list of avaliable serial ports to connect to and adds to combo box
 
-        self.set_freq_timer= QTimer()
+        self.set_freq_timer= QtCore.QTimer()
         self.set_freq_timer.timeout.connect(self.slowFreqUpdate)
 
-        self.wavelength_check_timer = QTimer()
+        self.wavelength_check_timer = QtCore.QTimer()
         self.wavelength_check_timer.timeout.connect(self.updateWavemeterDisplay)
         self.wavelength_check_timer.start(10)
 
-        self.set_lock_timer = QTimer()
+        self.set_lock_timer = QtCore.QTimer()
         self.set_lock_timer.timeout.connect(self.lock_process)
 
         self.ButtonLock.clicked.connect(self.lock_slot)
@@ -123,7 +118,7 @@ class MyWindowClass(QtGui.QMainWindow, form_class):
     def ButtonConnect_clicked(self,connection):
         if not self.connected:
             self.windfreak = wc.windfreakusb2(str(self.comboSerialBox.currentText()))
-            self.timer = QTimer()
+            self.timer = QtCore.QTimer()
             self.connected = True
             self.timer.timeout.connect(self.update)
             self.timer.start(1000)
@@ -141,8 +136,9 @@ class MyWindowClass(QtGui.QMainWindow, form_class):
 
     def slowFreqUpdate_Slot(self,value):
         self.timestep = float(self.time_box.text())
-        self.set_freq_timer.start(self.timestep*100)
-        self.connect(self,SIGNAL("UpdatedFreq"),self.Pause_slowFreqUpdateSlot)
+        self.set_freq_timer.start(int(self.timestep*100))
+        # self.connect(self,SIGNAL("UpdatedFreq"),self.Pause_slowFreqUpdateSlot)
+        self.UpdatedFreq.connect(self.Pause_slowFreqUpdateSlot)
 
     def Pause_slowFreqUpdateSlot(self):
         self.set_freq_timer.stop()
@@ -163,7 +159,7 @@ class MyWindowClass(QtGui.QMainWindow, form_class):
         if abs(self.freq_end - self.freq_current) <= self.freqstep:
             self.updateFreq((self.freq_end))
             print('Finishing Slowly Updating Freq')
-            self.emit(SIGNAL("UpdatedFreq"))
+            self.UpdatedFreq.emit()
         elif self.freq_end  > self.freq_current :
             self.updateFreq(self.freq_current + self.freqstep)
         elif  self.freq_end  < self.freq_current :
@@ -271,12 +267,13 @@ class MyWindowClass(QtGui.QMainWindow, form_class):
             self.set_lock_timer.stop()
 
     def prelock_check(self):
-        passed = True
+        if self.wavelength == "Unavailable wavemeter":
+            return False
         if float(self.wavelength) < float(self.freq_lock_box_min.text()) or float(self.wavelength) > float(self.freq_lock_box_max.text()) :
-            passed = False
-        return passed
+            return False
+        return True
 
-app = QtGui.QApplication(sys.argv)
+app = QtWidgets.QApplication(sys.argv)
 myWindow = MyWindowClass(None)
 myWindow.show()
 app.exec_()
